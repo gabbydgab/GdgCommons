@@ -1,0 +1,39 @@
+{
+    "name": "gabbydgab/gdg-commons",
+    "description": "Abstract common library for web applications",
+    "license": "BSD-2-Clause",
+    "type": "library",    
+    "keywords": [
+        "Common web app library",
+        "data mapper"
+    ],
+    "homepage": "https://github.com/gabbydgab/GdgCommons",
+    "authors": [
+        {
+            "name": "Gab Amba",
+            "email": "gamba@gabbydgab.com",
+            "homepage": "http://www.gabbydgab.com/"
+        }
+    ],
+    "require": {
+        "zendframework/zend-db": "2.3.*",
+        "zendframework/zend-stdlib": "2.3.*",
+        "zendframework/zend-servicemanager": "2.3.*"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
+        }
+    },
+    "autoload": {
+        "psr-4": {            
+            "GdgCommons\\Exception\\": "library/Exception/",
+            "GdgCommons\\DataMapper\\": "library/DataMapper/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.*",
+        "phpunit/php-invoker": "1.*"
+    }
+}
