@@ -1,6 +1,6 @@
 <?php
 
-/**
+/* * 
  * Copyright (c) 2014, Gab Amba <gamba@gabbydgab.com>
  * All rights reserved.
  *
@@ -9,11 +9,11 @@
  *
  * * Redistributions of source code must retain the above copyright notice,
  *   this list of conditions and the following disclaimer.
- *
+ *   
  * * Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- *
+ *   
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -27,37 +27,42 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace GdgCommons\DataMapper\Mapper;
+namespace GdgCommons\DataMapperTest\Traits;
 
 /**
- * GdgCommons\DataMapper\Mapper\AwareInterface
+ * GdgCommons\DataMapperTest\Traits\MapperAwareTraitTest
  *
  * @author Gab Amba <gamba@gabbydgab.com>
- * @package GdgCommons\DataMapper\Mapper
+ * @package GdgCommons\DataMapperTest\Traits
  */
-interface AwareInterface
+class MapperAwareTraitTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Setting table name
-     *
-     * @param string $tableName
+     * @test
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage Mapper object must be instance of GdgCommons\DataMapper\Mapper\AbstractPrototype
      */
-    public function setTableName($tableName = "");
-
+    public function getMapperPrototypeMustReturnRuntimeExceptionIfMapperObjectIsNotSet()
+    {
+        $stub = $this->getMockBuilder("GdgCommons\DataMapper\MapperAwareTrait")                
+                ->getMockForTrait();
+        
+        $stub->getMapperPrototype();
+    }
+    
     /**
-     * @return string $_tableName
+     * @test
      */
-    public function getTableName();
-
-    /**
-     * Setting database name
-     *
-     * @param string $databaseName
-     */
-    public function setDatabaseName($databaseName = "");
-
-    /**
-     * @return string $_databaseName
-     */
-    public function getDatabaseName();
+    public function settingMapperPrototype()
+    {
+        $entity = $this->getMockBuilder("GdgCommons\DataMapper\Mapper\AbstractPrototype")                
+                ->getMockForAbstractClass();
+        
+        $stub = $this->getMockBuilder("GdgCommons\DataMapper\MapperAwareTrait")                
+                ->getMockForTrait();
+        
+        $stub->setMapperPrototype($entity);
+        
+        $this->assertEquals($stub->getMapperPrototype(), $entity);
+    }
 }

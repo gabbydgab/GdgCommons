@@ -27,37 +27,47 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-namespace GdgCommons\DataMapper\Mapper;
+namespace GdgCommons\DataMapper;
+
+use GdgCommons\DataMapper\Mapper\AbstractPrototype AS AbstractMapperPrototype;
+use GdgCommons\Exception\RuntimeException AS GdgCommonsRuntimeException;
 
 /**
- * GdgCommons\DataMapper\Mapper\AwareInterface
+ * GdgCommons\DataMapper\MapperAwareTrait
  *
  * @author Gab Amba <gamba@gabbydgab.com>
- * @package GdgCommons\DataMapper\Mapper
+ * @package GdgCommons\DataMapper
  */
-interface AwareInterface
+trait MapperAwareTrait
 {
     /**
-     * Setting table name
+     * Type of \GdgCommons\DataMapper\Mapper object
      *
-     * @param string $tableName
+     * @var \GdgCommons\DataMapper\Mapper\AbstractPrototype
      */
-    public function setTableName($tableName = "");
+    protected $_mapper;
 
     /**
-     * @return string $_tableName
-     */
-    public function getTableName();
-
-    /**
-     * Setting database name
+     * Setting the \GdgCommons\DataMapper\Mapper object
      *
-     * @param string $databaseName
+     * @param \GdgCommons\DataMapper\Mapper\AbstractPrototype $mapper
      */
-    public function setDatabaseName($databaseName = "");
+    public function setMapperPrototype(AbstractMapperPrototype $mapper)
+    {
+        $this->_mapper = $mapper;
+    }
 
     /**
-     * @return string $_databaseName
+     * @return \GdgCommons\DataMapper\Mapper\AbstractPrototype
      */
-    public function getDatabaseName();
+    public function getMapperPrototype()
+    {
+        if (!$this->_mapper instanceof AbstractMapperPrototype) {
+            throw new GdgCommonsRuntimeException(
+                "Mapper object must be instance of GdgCommons\DataMapper\Mapper\AbstractPrototype"
+            );
+        }
+
+        return $this->_mapper;
+    }
 }
