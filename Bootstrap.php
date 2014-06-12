@@ -30,6 +30,3 @@
 //Autoloading 3rd-party classes
 require __DIR__ . "/vendor/autoload.php";
 
-//GdgCommons classes
-require __DIR__ . "/autoload_classmap.php";
-
