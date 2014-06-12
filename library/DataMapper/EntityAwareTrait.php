@@ -1,6 +1,6 @@
 <?php
 
-/* * 
+/**
  * Copyright (c) 2014, Gab Amba <gamba@gabbydgab.com>
  * All rights reserved.
  *
@@ -9,11 +9,11 @@
  *
  * * Redistributions of source code must retain the above copyright notice,
  *   this list of conditions and the following disclaimer.
- *   
+ *
  * * Redistributions in binary form must reproduce the above copyright notice,
  *   this list of conditions and the following disclaimer in the documentation
  *   and/or other materials provided with the distribution.
- *   
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -42,21 +42,21 @@ trait EntityAwareTrait
 {
     /**
      * Type of \GdgCommons\DataMapper\Entity object
-     * 
+     *
      * @var \GdgCommons\DataMapper\Entity\AbstractPrototype
      */
     protected $_entity;
-    
+
     /**
      * Setting the \GdgCommons\DataMapper\Entity object
-     * 
+     *
      * @param \GdgCommons\DataMapper\Entity\AbstractPrototype $entity
      */
     public function setEntityPrototype(AbstractEntityPrototype $entity)
     {
         $this->_entity = $entity;
     }
-    
+
     /**
      * @return \GdgCommons\DataMapper\Entity\AbstractPrototype
      */
@@ -67,27 +67,27 @@ trait EntityAwareTrait
                 "Entity object must be instance of GdgCommons\DataMapper\Entity\AbstractPrototype"
             );
         }
-        
+
         return $this->_entity;
     }
-    
+
     /**
      * Returns the entity ID (\GdgCommons\DataMapper\Entity\AbstractPrototype::$_keyId)
-     * 
+     *
      * @return integer
      */
     public function getEntityId()
     {
         return $this->getEntityPrototype()->getId();
     }
-    
+
     /**
      * Returns entity key name
-     * 
+     *
      * @return string $keyName
      */
     public function getEntityKeyName()
     {
         return $this->getEntityPrototype()->getKeyName();
-    }    
+    }
 }
