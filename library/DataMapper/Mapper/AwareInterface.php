@@ -29,6 +29,8 @@
 
 namespace GdgCommons\DataMapper\Mapper;
 
+use GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter;
+
 /**
  * GdgCommons\DataMapper\Mapper\AwareInterface
  *
@@ -60,4 +62,26 @@ interface AwareInterface
      * @return string $_databaseName
      */
     public function getDatabaseName();
+    
+    /**
+     * Setting database adapter object 
+     * 
+     * @param \GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter $adapter
+     */
+    public function setDatabaseAdapter(AbstractDatabaseAdapter $adapter);
+    
+    /**
+     * Returns database adapter object
+     * 
+     * @return \GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter $adapter
+     */
+    public function getDatabaseAdapter();
+    
+    /**
+     * Will return the database record as Array
+     * 
+     * @param string $query
+     * @return Array data collection from database
+     */
+    public function fetchResult($query = "");
 }

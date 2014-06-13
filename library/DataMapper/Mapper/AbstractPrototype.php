@@ -31,6 +31,7 @@ namespace GdgCommons\DataMapper\Mapper;
 
 use GdgCommons\Exception\InvalidArgumentException AS GdgCommonsInvalidArgumentException;
 use GdgCommons\Exception\RuntimeException AS GdgCommonsRuntimeException;
+use GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter;
 
 /**
  * GdgCommons\DataMapper\Mapper\AbstractPrototype
@@ -50,6 +51,11 @@ abstract class AbstractPrototype implements AwareInterface
      */
     protected $_databaseName;
     
+    /**
+     * @var \GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter
+     */
+    protected $_dbAdapter;
+
     /**
      * {@inheritDoc}
      * 
@@ -116,5 +122,45 @@ abstract class AbstractPrototype implements AwareInterface
         }
         
         return $this->_databaseName;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @param \GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter $adapter
+     */
+    public function setDatabaseAdapter(AbstractDatabaseAdapter $adapter)
+    {
+        $this->_dbAdapter = $adapter;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @return \GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter
+     * @throws GdgCommonsRuntimeException
+     */
+    public function getDatabaseAdapter()
+    {
+        if (empty($this->_dbAdapter)) {
+            throw new GdgCommonsRuntimeException("Database adapter is not set");
+        }
+        
+        return $this->_dbAdapter;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @param atring $query
+     * @return Array
+     */
+    public function fetchResult($query = "")
+    {
+        if (empty($query)) {
+            throw new GdgCommonsInvalidArgumentException("SQL query string is empty");
+        }
+        
+        return $this->getDatabaseAdapter()->execute($query);
     }
 }
