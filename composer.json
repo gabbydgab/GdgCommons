@@ -29,7 +29,8 @@
     "autoload": {
         "psr-4": {            
             "GdgCommons\\Exception\\": "library/Exception/",
-            "GdgCommons\\DataMapper\\": "library/DataMapper/"
+            "GdgCommons\\DataMapper\\": "library/DataMapper/",
+            "GdgCommons\\DatabaseAdapter\\": "library/DatabaseAdapter/"
         }
     },
     "require-dev": {

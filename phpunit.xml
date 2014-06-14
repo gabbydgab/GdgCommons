@@ -13,6 +13,7 @@
     <testsuites>
         <testsuite name="unit">
             <directory>./test/DataMapperTest/</directory>
+            <directory>./test/DatabaseAdapterTest/</directory>
         </testsuite>
     </testsuites>
     
