@@ -84,4 +84,8 @@ interface AwareInterface
      * @return Array data collection from database
      */
     public function fetchResult($query = "");
+    
+    public function update($query = "");
+    
+//    public function alter($query = "");
 }

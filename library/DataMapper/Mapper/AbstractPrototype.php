@@ -163,4 +163,13 @@ abstract class AbstractPrototype implements AwareInterface
         
         return $this->getDatabaseAdapter()->execute($query);
     }
+    
+    public function update($query = "")
+    {
+        if (empty($query)) {
+            throw new GdgCommonsInvalidArgumentException("SQL query string is empty");
+        }
+        
+        return $this->getDatabaseAdapter()->updateQuery($query);
+    }
 }

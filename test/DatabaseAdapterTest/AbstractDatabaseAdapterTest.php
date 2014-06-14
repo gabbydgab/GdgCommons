@@ -58,4 +58,25 @@ class AbstractDatabaseAdapterTest extends \PHPUnit_Framework_TestCase
         
         $this->assertEquals($adapter->execute($sql), $expectation);
     }
+    
+    /**
+     * @test
+     */
+    public function updateFunctionShouldReturnBoolean()
+    {
+        $sql = "UPDATE table_name SET column1 = value WHERE id = 123";
+        
+        $expectation = TRUE;
+        
+        $adapter = $this->getMockBuilder("GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter")
+                ->getMockForAbstractClass();
+        
+        $adapter->expects($this->any())
+                ->method("updateQuery")
+                ->with($this->stringContains($sql))
+                ->will($this->returnValue($expectation));
+        
+        $this->assertEquals($adapter->update($sql), $expectation);
+        $this->assertTrue(is_bool($adapter->update($sql)));
+    }
 }

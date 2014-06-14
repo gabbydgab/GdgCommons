@@ -43,5 +43,16 @@ abstract class AbstractDatabaseAdapter implements DatabaseAwareInterface
         return $this->performQuery($query);
     }
     
+    public function update($query)
+    {
+        return $this->updateQuery($query);
+    }
+
+
     abstract public function performQuery($query);
+    
+    public function updateQuery($query)
+    {
+        return TRUE;
+    }
 }

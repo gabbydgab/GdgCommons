@@ -38,5 +38,8 @@ use GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter;
  */
 class ZendDbAdapter extends AbstractDatabaseAdapter
 {
-    
+    public function performQuery($query)
+    {
+        //DO SOMETHING HERE;
+    }
 }

@@ -37,4 +37,6 @@ namespace GdgCommons\DatabaseAdapter;
 interface DatabaseAwareInterface
 {
     public function execute($query);
+    
+    public function update($query);
 }

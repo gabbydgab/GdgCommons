@@ -222,4 +222,50 @@ class AbstractMapperPrototypeTest extends \PHPUnit_Framework_TestCase
         $stub->setDatabaseAdapter($adapter);
         $stub->fetchResult($sql);
     }
+    
+    
+    /**
+     * @test
+     */
+    public function updateDataInformationShouldReturnBooleanValue()
+    {
+        $sql = "UPDATE table_name SET column = 1 WHERE id = 123";
+        
+        $expectation = true;
+        
+        $adapter = $this->getMockBuilder("GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter")
+                ->getMockForAbstractClass();
+        
+        $adapter->expects($this->any())
+                ->method("updateQuery")
+                ->with($this->stringContains($sql))
+                ->will($this->returnValue($expectation));
+        
+        $stub = $this->getMockBuilder("GdgCommons\DataMapper\Mapper\AbstractPrototype")
+                ->getMockForAbstractClass();
+        
+        $stub->setDatabaseAdapter($adapter);
+        
+        $this->assertEquals($stub->update($sql), $expectation);
+        $this->assertTrue(is_bool($stub->update($sql)));
+    }    
+    
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage SQL query string is empty
+     */
+    public function updateDataResultWillReturnInvalidArgumentExceptionIfQueryIsEmpty()
+    {
+        $sql = "";
+                
+        $adapter = $this->getMockBuilder("GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter")
+                ->getMockForAbstractClass();
+                
+        $stub = $this->getMockBuilder("GdgCommons\DataMapper\Mapper\AbstractPrototype")
+                ->getMockForAbstractClass();
+        
+        $stub->setDatabaseAdapter($adapter);
+        $stub->update($sql);
+    }
 }
