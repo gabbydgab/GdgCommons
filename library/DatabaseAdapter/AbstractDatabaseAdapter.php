@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2013, Gab Amba <gamba@gabbydgab.com>
+ * Copyright (c) 2014, Gab Amba <gamba@gabbydgab.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,6 +29,7 @@
 namespace GdgCommons\DatabaseAdapter;
 
 use GdgCommons\Exception\InvalidArgumentException AS GdgCommonsInvalidArgumentException;
+use GdgCommons\Exception\RuntimeException AS GdgCommonsRuntimeException;
 
 /**
  * GdgCommons\DatabaseAdapter\AbstractDatabaseAdapter
@@ -38,21 +39,59 @@ use GdgCommons\Exception\InvalidArgumentException AS GdgCommonsInvalidArgumentEx
  */
 abstract class AbstractDatabaseAdapter implements DatabaseAwareInterface
 {
+    /**
+     * {@inheritDoc}
+     * 
+     * @param $adapter
+     */
+    public function setAdapter($adapter)
+    {
+        $this->_adapter = $adapter;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @return $adapter
+     */
+    public function getAdapter()
+    {
+        if (empty($this->_adapter)) {
+            throw new GdgCommonsRuntimeException("Adapter factory is not set");
+        }
+        
+        return $this->_adapter;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * 
+     * @param string $query
+     * @return Array
+     */
     public function execute($query)
     {        
         return $this->performQuery($query);
     }
     
+    /**
+     * {@inheritDoc}
+     * 
+     * @param string $query
+     * @return boolean
+     */
     public function update($query)
     {
         return $this->updateQuery($query);
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     abstract public function performQuery($query);
     
-    public function updateQuery($query)
-    {
-        return TRUE;
-    }
+    /**
+     * {@inheritDoc}
+     */
+    abstract public function updateQuery($query);
 }

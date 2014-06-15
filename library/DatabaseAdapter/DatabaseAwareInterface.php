@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright (c) 2013, Gab Amba <gamba@gabbydgab.com>
+ * Copyright (c) 2014, Gab Amba <gamba@gabbydgab.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -36,7 +36,26 @@ namespace GdgCommons\DatabaseAdapter;
  */
 interface DatabaseAwareInterface
 {
+    /**
+     * Sets the database adapter object 
+     * 
+     * @param $adapter
+     */
+    public function setAdapter($adapter);
+    
+    /**
+     * Return database adapter
+     * 
+     * @return $adapter
+     */
+    public function getAdapter();
+    
+    
     public function execute($query);
     
     public function update($query);
+    
+    public function isConnected();
+    
+    public function reconnect();
 }
