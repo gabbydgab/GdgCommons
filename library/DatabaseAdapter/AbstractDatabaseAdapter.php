@@ -40,6 +40,11 @@ use GdgCommons\Exception\RuntimeException AS GdgCommonsRuntimeException;
 abstract class AbstractDatabaseAdapter implements DatabaseAwareInterface
 {
     /**
+     * @var Database Adapter
+     */
+    protected $_adapter;
+    
+    /**
      * {@inheritDoc}
      * 
      * @param $adapter
