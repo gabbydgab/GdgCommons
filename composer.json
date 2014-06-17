@@ -16,9 +16,9 @@
         }
     ],
     "require": {
-        "zendframework/zend-db": "2.3.*",
-        "zendframework/zend-stdlib": "2.3.*",
-        "zendframework/zend-servicemanager": "2.3.*"
+        "zendframework/zend-db": "2.2.*",
+        "zendframework/zend-stdlib": "2.2.*",
+        "zendframework/zend-servicemanager": "2.2.*"
     },
     "extra": {
         "branch-alias": {
